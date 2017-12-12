@@ -1,6 +1,5 @@
 import numpy as np
 from scipy import stats
-import matplotlib.pyplot as plt
 
 F = ['x1.txt', 'x2.txt']
 
@@ -34,11 +33,17 @@ for FILE in F:
         E2 = np.mean(a)
         o2 = np.std(a)
 
-    plt.title(FILE)
-    plt.xlabel('N')
-    plt.ylabel('X')
-    plt.plot(np.arange(len(a)), a, 'o-', label='Xn')
-    plt.legend()
-    plt.grid(True)
-    plt.show()
+    # plt.title(FILE)
+    # plt.xlabel('N')
+    # plt.ylabel('X')
+    # plt.plot(np.arange(len(a)), a, 'o-', label='Xn')
+    # plt.legend()
+    # plt.grid(True)
+    # plt.show()
 
+# print('Covariation coefficient \n:',np.cov(arr1,arr2))
+# print('Covariation coefficient \n:',np.correlate(arr1,arr2))
+
+
+print('Covariation coefficient',stats.pearsonr(arr1, arr2)[0]*o1*o2)
+print('Correlation coefficient',stats.pearsonr(arr1, arr2)[0])
