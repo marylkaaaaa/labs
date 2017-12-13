@@ -24,52 +24,63 @@ x2 = []
 for i in a3:
     x2.append(float(i))
 
-# A
 
-print('Correlation coefficient', stats.pearsonr(y, x1)[0])
-print('Correlation coefficient', stats.pearsonr(y, x2)[0])
+def analyse_yxx(y, x1, x2):
+    # A
 
-# B
+    print('Correlation coefficient', stats.pearsonr(y, x1)[0])
+    print('Correlation coefficient', stats.pearsonr(y, x2)[0])
 
-# creating X matrix
-X = []
-for i in range(len(x1)):
-    X.append([])
-    X[i].append(1)
-    X[i].append(x1[i])
-    X[i].append(x2[i])
+    # B
 
-X = nm.array(X)
-print('\nX = ')
-print(X)
+    # creating X matrix
+    X = []
+    for i in range(len(x1)):
+        X.append([])
+        X[i].append(1)
+        X[i].append(x1[i])
+        X[i].append(x2[i])
 
-XT = X.T
+    X = nm.array(X)
+    print('\nX = ')
+    print(X)
 
-print('\n(XT*X)^(-1) = ')
-X = nm.linalg.inv(nm.dot(XT, X))
-print(X)
+    XT = X.T
 
-a = nm.dot(nm.dot(X, XT), y)
-print('\nbt =',a)
+    print('\n(XT*X)^(-1) = ')
+    X = nm.linalg.inv(nm.dot(XT, X))
+    print(X)
 
-ny = []
-for i in range(len(y)):
-    ny.append(a[0] + a[1] * x1[i] + a[2] * x2[i])
+    a = nm.dot(nm.dot(X, XT), y)
+    print('\nbt =', a)
 
-print('\nresult_y:', ny)
+    ny = []
+    for i in range(len(y)):
+        ny.append(a[0] + a[1] * x1[i] + a[2] * x2[i])
 
-print('R^2 = ', nm.var(ny)/nm.var(y))
+    print('\nresult_y:', ny)
 
-J = 0
-for i in range(len(y)):
-    J =+ pow(y[i]-ny[i],2)
-print('J = ', J)
+    print('R^2 = ', nm.var(ny) / nm.var(y))
 
-oe = sqrt(J/(len(y)-3))
+    J = 0
+    for i in range(len(y)):
+        J = + pow(y[i] - ny[i], 2)
+    print('J = ', J)
 
-print('t = [',end = ' ')
-for i in range(len(a)):
-    print(a[i]/(oe*X[i][i]),end=' ')
-print(']')
+    oe = sqrt(J / (len(y) - 3))
+
+    print('t = [', end=' ')
+    for i in range(len(a)):
+        print(a[i] / (oe * X[i][i]), end=' ')
+    print(']')
 
 
+analyse_yxx(y, x1, x2)
+
+print('=' * 100)
+
+y = nm.log(y)
+x1 = nm.log(x1)
+x2 = nm.log(x2)
+
+analyse_yxx(y, x1, x2)

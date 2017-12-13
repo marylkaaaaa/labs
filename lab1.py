@@ -1,5 +1,6 @@
 import numpy as np
 from scipy import stats
+import matplotlib.pyplot as plt
 
 F = ['x1.txt', 'x2.txt']
 
@@ -41,9 +42,5 @@ for FILE in F:
     # plt.grid(True)
     # plt.show()
 
-# print('Covariation coefficient \n:',np.cov(arr1,arr2))
-# print('Covariation coefficient \n:',np.correlate(arr1,arr2))
-
-
-print('Covariation coefficient',stats.pearsonr(arr1, arr2)[0]*o1*o2)
-print('Correlation coefficient',stats.pearsonr(arr1, arr2)[0])
+print('Covariation coefficient', stats.pearsonr(arr1, arr2)[0] * o1 * o2)
+print('Correlation coefficient', stats.pearsonr(arr1, arr2)[0])
